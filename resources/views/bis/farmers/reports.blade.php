@@ -164,9 +164,9 @@
                                         <div class="ibox-title">
                                            
                                         </div>
-                                        <div class="ibox-content">
-                                                   <div>
-                                                    <canvas id="barCharts"   height="140"></canvas>
+                                        <div class="ibox-content" id="barchartContainer">
+                                                <div>
+                                                    <canvas id="barCharts" ></canvas>
                                                 </div> 
                                         </div>
                                     </div>
@@ -268,72 +268,6 @@
           viewMode: "years",
           minViewMode: "years"
       });
-
-   
-        var barChartData = {
-          labels: ["2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"],
-          datasets: [
-            {
-              label: "Electronics",
-              fillColor: "#C8236C",
-              strokeColor: "#C8236C",
-              pointColor: "rgba(210, 214, 222, 1)",
-              pointStrokeColor: "#C8236C",
-              pointHighlightFill: "#C8236C",
-              pointHighlightStroke: "#C8236C",
-              data: [6, 27, 90, 40, 19, 86, 27, 27, 27, 27]
-            },
-            {
-              label: "Digital Goods",
-              fillColor: "#23ADC8",
-              strokeColor: "#23ADC8",
-              pointColor: "#23ADC8",
-              pointStrokeColor: "#23ADC8",
-              pointHighlightFill: "#23ADC8",
-              pointHighlightStroke: "#23ADC8",
-              data: [6, 27, 90, 40, 19, 86, 27, 27, 27, 27]
-            }
-          ]
-        };
-/*C8236C
-23ADC8*/
-         //-------------
-        //- BAR CHART -
-        //-------------
-        var barChartCanvas = $("#barCharts").get(0).getContext("2d");
-        var barChart = new Chart(barChartCanvas);
-        var barChartData = barChartData;
-
-        var barChartOptions = {
-          //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-          scaleBeginAtZero: true,
-          //Boolean - Whether grid lines are shown across the chart
-          scaleShowGridLines: true,
-          //String - Colour of the grid lines
-          scaleGridLineColor: "rgba(0,0,0,.05)",
-          //Number - Width of the grid lines
-          scaleGridLineWidth: 2,
-          //Boolean - Whether to show horizontal lines (except X axis)
-          scaleShowHorizontalLines: true,
-          //Boolean - Whether to show vertical lines (except Y axis)
-          scaleShowVerticalLines: true,
-          //Boolean - If there is a stroke on each bar
-          barShowStroke: true,
-          //Number - Pixel width of the bar stroke
-          barStrokeWidth: 5,
-          //Number - Spacing between each of the X value sets
-          barValueSpacing: 4,
-          //Number - Spacing between data sets within X values
-          barDatasetSpacing: 10,
-          //String - A legend template
-          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-          //Boolean - whether to make the chart responsive
-          responsive: true,
-          maintainAspectRatio: true
-        };
-
-        barChartOptions.datasetFill = false;
-        barChart.Bar(barChartData, barChartOptions);
 
 });
 

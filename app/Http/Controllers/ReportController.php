@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Pdf;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
+
+use Pdf;
+
 class ReportController extends Controller
 {
     public function test_pdf(){
@@ -21,13 +23,21 @@ class ReportController extends Controller
 
     public function bargraphGuiReport(){
 
-    	
+    	$incomeGraph = db::table('tblviewgraph')
+    			->where('person_id',Request::input('person_id'))
+    			->where('year','>=',Request::input('start'))
+    			->where('year','<=',Request::input('end'))
+    			->orderby('year','asc')
+    			->get();
+
+    	return $incomeGraph;
 
     }
 
     public function getFarmersReports(){
 
-    	$person = db::table('ref_person')->get();
+    	$person = db::table('ref_person')
+    		->get();
 
         return view('bis.farmers.reports')
         		->with('person',$person);

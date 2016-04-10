@@ -32,7 +32,6 @@ class FarmerController extends Controller
 
         $return = new rrdReturn();
 
-        'dsdsd';
 
         $tribe             = TribeModel::firstOrNew(['tribe_name' => Request::input('tribe_name')]);     
     		$tribe->tribe_name = Request::input('tribe_name');
