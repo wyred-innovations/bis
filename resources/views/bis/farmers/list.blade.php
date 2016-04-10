@@ -1,6 +1,9 @@
 @extends('bis.main.index')
 
+@section('css_filtered')
 <style>
+
+
     
     .slider{
         margin:0px auto;
@@ -9,6 +12,7 @@
     .sliderHolder{
         padding:10px;
         background-color: #E0E0E0;
+        height: auto;
     }
 
     .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
@@ -39,12 +43,12 @@
 
 
     td.details-control {
-      background: url('/system/icons/plus.png') no-repeat center center;
+      background: url('/assets/system/icons/plus.png') no-repeat center center;
       cursor: pointer;
     }
    
      tr.shown  td.details-control {
-        background: url('/system/icons/minus.png') no-repeat center center;
+        background: url('/assets/system/icons/minus.png') no-repeat center center;
     }
     .ref_provider_details{
      /* background-color: #CDCDCD;
@@ -64,6 +68,8 @@
     }
 
 </style>
+@stop
+
 @section('content')
 <div class="col-lg-12" style="margin-top:-30px;">
     <h2>Farmers List Profile</h2>
@@ -117,23 +123,21 @@
             </div>
             <div class="row">
              <div class="col-md-12">
-                <table id="ref_provider" class="footable table table-stripped toggle-arrow-tiny" role="grid" aria-describedby="example2_info">
+                <table id="farmerList" class="footable table table-stripped toggle-arrow-tiny" role="grid" aria-describedby="example2_info">
                     <thead class="header-th">
                       <tr>
                         <th><i class="fa fa-search"></i></th>
                         <th class="header-th">Name of Farmer</th>
                         <th class="header-th">Organization</th>
-                        <th class="header-th">Print Preview</th>
-                        <th class="header-th">Edit</th>
-                        <th class="header-th">Delete</th>
+                        <th class="header-th text-center">Records</th>
+                        <th class="header-th text-center">Edit</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>a</td>
-                        <td>b</td>
-                        <td>c</td>
-                        <td><a class="btn btn-info" href="#" onclick="window.open('/reports/tvet-provider', '_blank', 'location=yes,height=500,width=750,scrollbars=yes,status=yes')"><i class="fa fa-print"></i> Print Preview</a></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-center"></td>
                         <td class="text-center"></td>
                         <td class="text-center"></td>
                       </tr>
@@ -147,7 +151,11 @@
         </div>
     </div>
 </div>
+@stop
 
+
+@section('js_filtered')
+@include('bis.jslinks.js_datatables')
 <script type="text/javascript">
     $(document).ready( function(){
        $('#ref_provider').DataTable();
@@ -157,12 +165,11 @@
     });
 
     function ref_provider(){
-      var finalDev = window.dev;
       
-      $('#ref_provider').dataTable().fnClearTable();
-      $("#ref_provider").dataTable().fnDestroy();
+      $('#farmerList').dataTable().fnClearTable();
+      $("#farmerList").dataTable().fnDestroy();
 
-          var ref_provider_data = $('#ref_provider').DataTable({
+          var farmer_table = $('#farmerList').DataTable({
           responsive: true,
           bAutoWidth:false,
 
@@ -178,14 +185,14 @@
               "url": sSource,
               "data": aoData,
               "success": function (data) {
-                ref_provider_table = data;
-                console.log(ref_provider_table);
-                fnCallback(data);           
+                farmer_data = data;
+                console.log(farmer_data);
+                fnCallback(farmer_data);           
               }
             });
           },
                      
-          "sAjaxSource": "/retrieve/ref_provider",
+          "sAjaxSource": "/retrieve/farmerList",
           "sAjaxDataProp": "",
           "iDisplayLength": 10,
           "scrollCollapse": false,
@@ -199,55 +206,67 @@
                       "data":           null,
                       "defaultContent": ''
                 },
-                { "mData": "provider_name", sDefaultContent: ""},
-                { "mData": "providertype_name", sDefaultContent: ""},
-                { "mData": "pc_name", sDefaultContent: ""},
+                
+                { "mRender" : function ( data, type, full ) { 
+                        return full.last_name+ ", " + full.first_name + " " +full.middle_name; 
+                }
+                },
+
+                { "mData": "organization_name", sDefaultContent: ""},
+            
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/admin/tvet/provider-registration?up=true&tvet='+oData.tvetpro_id+'" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>');
+                      $(nTd).html('<a href="/bis/farmers-tracking-years/'+oData.person_id+'" class="btn btn-danger btn-sm"><i class="fa fa-list"></i> Track Records</a>');
                   }
                 },
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" onclick="tvet_delete(this);" class="btn btn-danger btn-sm" data-table="ref_providertbl" data-id="'+oData.tvetpro_id+'" data-url="tvet_delete" class="delete_row"><i class="fa fa-trash"></i> Delete</a>');
+                      $(nTd).html('<a href="/bis/farmer/'+oData.person_id+'/" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>');
                   }
                 },
+               
                 
           ]
       });
 
-        $('#ref_provider tbody').on('click', 'td.details-control', function () {
+        $('#farmerList tbody').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
-            var row = ref_provider_data.row( tr );
+            var row = farmer_table.row( tr );
             var row_id = $(tr).attr("data-id");
             
             if ( row.child.isShown() ) {
-                row.child.hide();
-                tr.removeClass('shown');
-                $(this).removeClass('hidden_row');
-                $(this).addClass('show_row');
-            }
-            else {
-                row.child( format(row_id)).show();
-                tr.addClass('shown');
-                $(this).addClass('hidden_row');
-                $(this).removeClass('show_row');
-            }
-        });
+                  
+              $('div.slider', row.child()).slideUp( function () {
+                  row.child.hide();
+                  tr.removeClass('shown');
+              } );
+              }
+              else {
+                  // Open this row
+                  var prop_id_name = $(tr).attr("data-id");
+                  row.child( format(row_id)).show();
+                  $('div.slider', row.child()).slideDown();
+                  tr.addClass('shown');
+                  //ref_serial(prop_id_name);
+              }
+
+          } );
     
     }
 
     function format (row_id) {
-      return '<div class="sliderHolder slider">'+
+
+               return '<div class="sliderHolder"><div class="slider" style="">'+
                 '<div class="list-group" style="margin-top:20px;background-color:#FFFFFF;">'+
                   '<a href="#" class="list-group-item active" style="text-align:left">DETAILED INFORMATION</a>'+
-                  '<a href="#" class="list-group-item "><b>Date of Birth </b>: '+ref_provider_table[row_id].region_name+'</a>'+
-                  '<a href="#" class="list-group-item "><b>Civil Status </b>: '+ ref_provider_table[row_id].province_name +'</a>'+
-                  '<a href="#" class="list-group-item "><b>Nationality </b>: '+ ref_provider_table[row_id].district_name +'</a>'+
-                  '<a href="#" class="list-group-item "><b>School Atainment </b>: '+ ref_provider_table[row_id].munipality_name +'</a>'+
-                  '<a href="#" class="list-group-item "><b>Address </b>: '+ ref_provider_table[row_id].address +'</a>'+
+                  '<a href="#" class="list-group-item "><b>Full Name </b>: '+removeNull(farmer_data[row_id].last_name)+ " "+ removeNull(farmer_data[row_id].first_name)+", "+removeNull(farmer_data[row_id].middle_name)+'</a>'+
+                  '<a href="#" class="list-group-item "><b>Age </b>: '+ removeNull(farmer_data[row_id].age) +'</a>'+
+                  '<a href="#" class="list-group-item "><b>Gender </b>: '+ removeNull(farmer_data[row_id].gender) +'</a>'+
+                  '<a href="#" class="list-group-item "><b>Religion </b>: '+ removeNull(farmer_data[row_id].religion_name) +'</a>'+
+                  '<a href="#" class="list-group-item "><b>Spouse(if any) </b>: '+ removeNull(farmer_data[row_id].spouse) +'</a>'+
+                  '<a href="#" class="list-group-item "><b>Organization </b>: '+ removeNull(farmer_data[row_id].organization_name) +'</a>'+
                 '</div>'+
-              '</div>';  
+              '</div></div>';  
       // return '<ul  class=" table table-bordered table-stripes">'+
       //         '<li>TVET Provider Address</li>'+
       //         '<li>Region:'+ ' ' +ref_provider_table[row_id].region_name+'</li>'+
@@ -257,6 +276,15 @@
       //         '<li>Address:'+ ' ' +ref_provider_table[row_id].address+'</li>'+
       //       '</ul>';
     }
+
+
+function removeNull(Val){
+  if(Val == null){
+    return "";
+  }else{
+    return Val;
+  }
+} 
 
 function tvet_delete(btn){
     var url = $(btn).attr("data-url");

@@ -147,6 +147,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -203,6 +205,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'LeadAuth' => App\LeadSoft\Security\LeadAuth\LeadAuth::class,
         'LeadSoftModel' => App\LeadSoft\LeadSoftModel\LeadSoftModel::class,
+        'DatatableFormat' => App\LeadSoft\Datatables\DatatableFormat::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Pdf' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+
     ],
 
 ];

@@ -19,6 +19,8 @@ use Auth;
 use DB;
 use Session;
 use Hash;
+use Mail;
+use App\VerificationModel;
 
 class LeadSoftController extends Controller
 {
@@ -91,20 +93,136 @@ class LeadSoftController extends Controller
 		return view('admin.security.login.verificationCode');
 	}
 
-	public function sendVerificationCode(){
+	
+
+	public function passwordReset(){
 
 
+		$return = new rrdReturn();
+
+		$date = date("Y/m/d");
+		$thisDate = str_replace('/', '-', $date);
 		$user = db::table('tbl_users')
 				->where('username',Request::input("email"))
 				->first();
 
-		$verification                    = new LeadSoftModel('dat_verification_request'); 
-		$verification->user_id           = $user->user_id;
-		$verification->verification_code = "";
-		$verification->date_expire       = $personPrev;
-		$verification->save();
+		if(count($user) > 0){
+
+
+			$verifyVCode = db::table('dat_verification_code')
+				->where('verification_code',Request::input("verification_code"))
+				->get();
+
+			
+
+			if(count($verifyVCode) == 0){
+
+				return $return->status(false)
+		                      ->message("Verification Code is invalid.Try again.")
+		                      ->show();
+			}else{
+
+				$codeExpires = db::table('dat_verification_code')
+				->where('verification_code',Request::input("verification_code"))			
+				->where('date_expire','=',$thisDate)	
+				->get();
+
+				if(count($codeExpires) == 0){
+
+					return $return->status(false)
+			                      ->message("Verification Code expired. Please request another one.")
+			                      ->show();
+				}
+			}
+
+			$userVerification = db::table('tbl_users')
+				->where('user_id',$user->user_id)
+				->update([
+							'password' => bcrypt(Request::input("new_password"))
+						 ]);
+		}else{
+
+			return $return->status(false)
+		                      ->message("Email is not registered. Try again.")
+		                      ->show();
+		}
+
+		$deleteVerificationCode = db::table('dat_verification_code')
+				->where('user_id',$user->user_id)
+				->update([
+							'verification_code' => ''
+						 ]);
+
+		return $return->status(true)
+		                      ->message("Password has been updated!")
+		                      ->show();
+
 	}
 
+	public function sendVerificationCode(){
+
+		$return = new rrdReturn();
+
+		$user = db::table('tbl_users')
+				->where('username',Request::input("email"))
+				->first();
+		do {
+
+			$verificationCode = str_random(20);
+
+			$verify = db::table('dat_verification_code')
+				->where('verification_code',$verificationCode)
+				->get();
+
+		} while (count($verify) > 0);
+
+
+		if(count($user) == 0){
+
+			return $return->status(false)
+		                      ->message("Email is not a registered. Try again.")
+		                      ->show();
+		} 
+
+		Mail::send('admin.mail.verificationCode', ['vcode' => $verificationCode], function($message)
+        {
+            $message->to(Request::input("email"), 'SMI')->subject('Verification Code');
+        });
+
+
+		$date = date("Y/m/d");
+		$expire = str_replace('-', '/', $date);
+
+
+
+
+		$userVerification = db::table('dat_verification_code')
+				->where('user_id',$user->user_id)
+				->get();
+
+		if(count($userVerification) > 0){
+
+			$userVerification = db::table('dat_verification_code')
+				->where('user_id',$user->user_id)
+				->update(['verification_code' => $verificationCode ,
+						  'date_expire'		 => $expire
+						 ]);
+		}else{
+
+			$verification                    = new VerificationModel; 
+			$verification->user_id           = $user->user_id;
+			$verification->verification_code = $verificationCode;
+			$verification->date_expire       = $expire;
+			$verification->save();
+		}
+
+		
+
+		return $return->status(true)
+		                      ->message("Verification Code has been sent!")
+		                      ->show();
+
+	}
 
 	
 

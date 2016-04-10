@@ -48,7 +48,8 @@
                     <li id="menu">
                         <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Menu</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level tree">
-                            <li id="farmers-reg"><a href="{{url('/bis/farmers/list')}}">Profile/Registration</a></li>
+                            <li id="farmers-reg"><a href="{{url('/bis/farmers/list')}}">Profile/Reg/Tracking</a></li>
+                            <li id="reports"><a href="{{url('/bis/farmers/reports')}}">Reports</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -66,7 +67,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to BIS.</span>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to BIS</span>
                 </li>
                 <li>
                     <a href="{{url('/admin/security/logout')}}">
@@ -91,12 +92,14 @@
 
         <div class="footer">
             <div class="pull-right">
-                Powered by <strong>LeadSoft</strong>
+                Powered by <strong>Wyred Innovations</strong>
             </div>
             <div>
                 <strong>Copyright</strong> Sacred Heart &copy; 2016
             </div>
         </div><!--/. end of footer -->
      </div><!--/. end of page-wrapper -->
+
+     </div>
 
       

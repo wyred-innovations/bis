@@ -7,17 +7,19 @@
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="shortcut icon" href="/system/img/SMIicon.ico">
+<link href="{{ URL::asset('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
 @include('bis.csslinks.css_links')
+@yield('css_filtered')
+
 </head>
 
-@include('bis.jslinks.js_initial')
 <body class="skin-acf-io layout-top-nav" >
     
 @include('bis.bodywrapper.body_wrapper')
 
 
 @include('bis.jslinks.js_initial')
-@include('bis.jslinks.js_final')
+@yield('js_filtered')
 
 </body>
 </html>

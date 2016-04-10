@@ -7,6 +7,7 @@
           var form = $(this).parents('form:first');
           var data = new FormData($(form)[0]);
 	      
+	      console.log(form);
 
 	      formValidate = $(form);
 
@@ -117,6 +118,55 @@
 
     }
 
+    function bottom_right_success(id,message){
+
+		toastr.options = {
+		  "closeButton": true,
+		  "debug": false,
+		  "newestOnTop": true,
+		  "progressBar": true,
+		  "positionClass": "toast-bottom-right",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+
+		toastr["success"](message)
+
+    }
+
+    function bottom_right_fail(id,message){
+    	
+        toastr.options = {
+		  "closeButton": true,
+		  "debug": false,
+		  "newestOnTop": true,
+		  "progressBar": true,
+		  "positionClass": "toast-bottom-right",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+
+		toastr["warning"](message)
+
+	}
+
+
     function fail(id,message){
     	
         toastr.options = {
@@ -136,6 +186,7 @@
 		  "showMethod": "fadeIn",
 		  "hideMethod": "fadeOut"
 		}
+
 
 		toastr["warning"](message)
     }

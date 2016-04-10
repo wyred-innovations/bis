@@ -8,11 +8,7 @@
 
     <title>BIS</title>
 
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <link href="/assets/css/animate.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    @include('bis.csslinks.css_links')
 
 </head>
 
@@ -28,7 +24,7 @@
             
             <p>Reset your password.</p>
             <p class="text-danger"><?php if(isset($messages)){ echo $messages; } ?></p>
-            <form class="m-t" role="form" method="post" action="/admin/security/login/Authentication">
+            <form id="forgotPassoword">
                 <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email / Username" required="" name="email">
@@ -42,18 +38,20 @@
                     <input type="password" class="form-control" placeholder="New Password" required="" name="new_password">
                 </div>
                 
-                <button type="submit" class="btn btn-primary block full-width m-b">Reset</button>
+                <button class="btn btn-primary ladda ladda-button  block full-width m-b " data-url="/password-reset" id="ladda" data-size="s" data-style="expand-left"><span class="ladda-label">Reset</span></button> </span>
 
                 <a href="/request-verification-code"><small>Request Verification Code?</small></a>
+                <br>
+                <a href="/admin/security/login/Authentication"><small>Log In</small></a>
+
                 <!-- <p class="text-muted text-center"><small>Do not have an account?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
             --> </form>
         </div>
     </div>
 
-    <!-- Mainly scripts -->
-    <script src="/assets/js/jquery-2.1.1.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
+    @include('bis.jslinks.js_initial')
+    @include('bis.jslinks.js_final')
 
 </body>
 

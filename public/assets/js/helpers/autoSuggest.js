@@ -7,13 +7,7 @@
           var obj = {display: data_display};
           var display = obj['display'];
           var data_filter='';
-          
-          if(data_display == 'province_name'){
-            data_filter = $(this).attr('data-filter');
-          }
-          if(data_display == 'municipality_name'){
-            data_filter = $(this).attr('data-filter');
-          }
+         
           
           $( this ).autocomplete({
               source: data_url+'?inputVal='+$(this).val()+'&data_filter='+data_filter,
