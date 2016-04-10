@@ -105,7 +105,7 @@
       var income  = [];
       var expenses  = [];
       var totalIncome = 0;
-      var finalIncome = [];
+      var finalIncome = [];z
 
       var totalExpenses = 0;
       var finalExpenses = [];
