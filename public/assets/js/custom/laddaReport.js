@@ -108,6 +108,7 @@
       var finalIncome = [];z
 
       var development = "Development";
+      
       var Stagin2 = "Staging2";
 
       var totalExpenses = 0;
