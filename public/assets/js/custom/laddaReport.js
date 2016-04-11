@@ -100,71 +100,71 @@
 
       event.preventDefault();
 
-      console.log(data);
-      var year  = [];
-      var income  = [];
-      var expenses  = [];
+
+
+
+      var year  = new Array();
+      var income  = new Array();
+      var expenses  = new Array();
+
       var totalIncome = 0;
-      var finalIncome = [];z
+      var finalIncome = new Array();
 
-      var development = "Development";
-      
-      var Stagin2 = "Staging2";
 
       var totalExpenses = 0;
-      var finalExpenses = [];
+      var finalExpenses = new Array();
 
-      var totalExpenses = 0;
       var tempYear = "";
-      var final_year  = [];
+      var final_year  = new Array();
 
+      console.log(data);
 
       for(i=0; i <= data.length - 1;i++){
+
           year[i] = data[i].year;
-      }
-      
-      console.log(year);
-      
-      for(i=0; i <= data.length - 1;i++){
+
           average = parseFloat(data[i].income_start) + parseFloat(data[i].income_end) ;
-          income[i] = average/2;
-      }
-
-      for(i=0; i <= data.length - 1;i++){
+          income = average/2;
+  
           average = parseFloat(data[i].expenses_start) + parseFloat(data[i].expenses_end) ;
-          expenses[i] = average/2;
-      }
+          expenses = average/2;
+          
+          console.log(income);
 
-      for(i = 0; i <= year.length -1 ; i++){
-
-
-          if(year[i] != tempYear){
+          if(i == 0){
 
             tempYear = year[i];
-            final_year[i] = tempYear;
 
-            finalIncome[i] = totalIncome;
-            finalExpenses[i] = totalExpenses;
-
-            console.log(finalIncome);
-
-            totalIncome = 0;
-            totalExpenses = 0;
-
-            
+            totalIncome += parseFloat(income);
+            totalExpenses += parseFloat(expenses);            
 
           }else{
 
-            totalIncome += income[i];
-            totalExpenses += expenses[i];
+
+                if(year[i] != tempYear){
+
+                    tempYear = year[i];
+
+                    final_year.push(tempYear);
+                    finalIncome.push(totalIncome);
+                    finalExpenses.push(totalExpenses);
+
+                    totalIncome = 0;
+                    totalExpenses = 0;
+
+                }else{
+
+                    totalIncome += parseFloat(income);
+                    totalExpenses += parseFloat(expenses);
+                    
+                }
 
           }
 
-          
-
-
       }
 
+      console.log(finalIncome);
+      
 
       var barChartData = {
           labels: final_year,
@@ -177,7 +177,7 @@
               pointStrokeColor: "#C8236C",
               pointHighlightFill: "#C8236C",
               pointHighlightStroke: "#C8236C",
-              data: finalIncome
+              data: finalExpenses
             },
             {
               label: "Expenses",
@@ -187,7 +187,7 @@
               pointStrokeColor: "#23ADC8",
               pointHighlightFill: "#23ADC8",
               pointHighlightStroke: "#23ADC8",
-              data: finalExpenses
+              data: finalIncome
             }
           ]
         };
@@ -234,3 +234,5 @@
       barChartOptions.datasetFill = false;
       barChart.Bar(barChartData, barChartOptions);
  }
+
+ /*char development ni*/

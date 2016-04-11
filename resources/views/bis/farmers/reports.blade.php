@@ -183,8 +183,7 @@
                               </h4>
                           </div>
                           <div id="collapseTwo" class="panel-collapse collapse">
-                              <div class="panel-body">
-
+                            <div class="panel-body">
                               <div class="col-md-12">
                                  <div class="col-md-4">
                                   <div class="form-group">
@@ -214,20 +213,82 @@
                                         </div>
                                     </div>
                                   </div>
+                              </div>
 
-                               
-                                
-                                  <div class="col-lg-12">
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-title">
-                                            <h5>Bar Chart Example <small>With custom colors.</small></h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                                
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
+
+                        <div class="col-md-12">
+                              <div class="hr-line-dashed"></div>
+                          </div>
+
+                          <div class="col-md-12">
+                          <h3>
+                          <span class="form-step"> <i class="fa fa-money"  style="margin-top:3px;"></i> </span>
+                          Estimated Monthly Income
+                          </h3> 
+                          </div>
+
+                           <div class="col-md-12">
+                              <table id="incomeTable" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+                                  <thead class="header-th">
+                                    <tr>
+                                      <th class="header-th">Item</th>
+                                      <th class="header-th text-center">Monthly Income</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                       <td colspan="2"><b>Kita (Income)</b></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-center">A</td>
+                                      <td class="text-center">B</td>
+                                    </tr>
+                              
+
+                                  </tbody>
+                                </table>
+                           </div>
+
+
+                               <div class="col-md-12">
+                              <div class="hr-line-dashed"></div>
+                          </div>
+
+                          <div class="col-md-12">
+                          <h3>
+                          <span class="form-step"> <i class="fa fa-money"  style="margin-top:3px;"></i> </span>
+                          Estimated Monthly Expenses
+                          </h3> 
+                          </div>
+
+                           <div class="col-md-12">
+                              <table id="incomeTable" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+                                  <thead class="header-th">
+                                    <tr>
+                                      <th class="header-th">Item</th>
+                                      <th class="header-th text-center">Estimated Monthly Expenses</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                       <td colspan="2"><b>Gasto (Expenses)</b></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-center">A</td>
+                                      <td class="text-center">B</td>
+                                    </tr>
+                              
+
+                                  </tbody>
+                                </table>
+                           </div>
+
+
+
+      
+
+
+                              
 
                               </div>
                           </div>
