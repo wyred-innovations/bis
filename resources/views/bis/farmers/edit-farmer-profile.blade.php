@@ -66,6 +66,23 @@
     }
 
 </style>
+<script>
+    function status(){
+
+        var stat = $("#civil_status").val();
+
+        if(stat == "Single"){
+                $("#spouse_name").attr("disabled", true);
+            $("#spouse_name").val(" ");
+        }
+        else{
+            $("#spouse_name").attr("disabled", false);
+
+        }
+
+    }
+
+</script>
 @stop
 
 @section('content')
@@ -139,7 +156,20 @@
            <div class="col-md-6">
             <div class="form-group">
              <label>Civil Status</label>
-              <input class="form-control input-sm autoSuggest" data-url="/bis/getCivilStatus" data-display="civil_status" value="{{$user->civil_status or ''}}" type="text" id="civil_status" name="civil_status"  data-display="Civil Status" required>               
+                <select name="civil_status" onchange="status()" id="civil_status" class="form-control input-sm">
+                    <option>{{$user->civil_status or ''}}</option>
+                    @if($user->civil_status == 'Single')
+                    <option>Married</option>
+                    <option>Widower</option>
+                        @elseif($user->civil_status == "Married")
+                        <option>Single</option>
+                        <option>Widower</option>
+                        @else
+                        <option>Single</option>
+                        <option>Married</option>
+                        @endif
+                </select>
+              {{--<input class="form-control input-sm autoSuggest" data-url="/bis/getCivilStatus" data-display="civil_status" value="{{$user->civil_status or ''}}" type="text" id="civil_status" name="civil_status"  data-display="Civil Status" required>  --}}
             </div>
             <div class="form-group">
              <label>School Attaintment</label>
@@ -164,7 +194,7 @@
             </div>
             <div class="form-group">
              <label>Name of Spouse</label>
-             <input class="form-control input-sm" type="text" value="{{$user->spouse_name or ''}}" id="spouse_name" name="spouse_name" >        
+             <input class="form-control input-sm" type="text" value="{{$user->spouse_name or ''}}"  @if($user->civil_status  =='Single') disabled @endif id="spouse_name" name="spouse_name" >
             </div>
             <div class="form-group">
              <label>Total Numbers of HH Members</label>
@@ -245,6 +275,7 @@
   
 
   $(document).ready( function(){
+     $('#rockets').hide();
      $("#start_crop").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
      $('#menu').addClass('active');
      $('#farmers-reg').addClass('active');

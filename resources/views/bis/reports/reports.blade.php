@@ -4,7 +4,7 @@
 		<link href="{{ URL::asset('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
 		<link href="{{ URL::asset('/assets/css/custom/rhitsReports.css') }}" rel="stylesheet">
 
-		<title>TVET PROVIDER</title>
+		<title>TVET </title>
 	</head>
 <body>
 	<div class="page-num">Page 1</div>
@@ -27,7 +27,7 @@
 
 		<div class="vertical-line">
 			 <label class="big-label">
-			   <span> R </span>
+			   <span> {{$data}} </span>
 			   <span> E </span>
 			   <span> G </span>
 			   <span> I </span>

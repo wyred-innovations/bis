@@ -34,7 +34,7 @@
         font-size: 12px;
     }
     .header-th {
-        background: #E76229!important;
+        background: #22C2C4!important;
         color: #FFFFFF;
     }
     div.slider {
@@ -90,44 +90,19 @@
             <div class="ibox-tools">
                <div class="pull-right" style="margin-right:-20px;">
                 <div class="col-md-12">
-                 <a class="btn btn-primary" href="/bis/farmers/new-tracking/{{$user->person_id}}" style="margin-top:-9px;"><i class="fa fa-plus"></i>Track New Data</a>
+                 <a class="btn btn-primary" href="/bis/farmers/new-tracking/{{$user->person_id}}" style="margin-top:-9px;"><i class="fa fa-plus"></i> Track New Data</a>
                </div>
                </div>
             </div>
         </div>
         <div class="ibox-content table-responsive">
-            <div class="panel-group" id="accordion">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-search"></i> Advanced Filter Search Option</a>
-                        </h5>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse">
-                        <div class="panel-body">
-                          <div class="form-group">
-                           <label>Benefactors</label>
-                            <select class="form-control input-sm benefactors" id="benefactors" onchange="benefactorsChange(this)" required>
-                              <option value=""></option>
-                            </select>
-                         </div>
-                          <div class="form-group">
-                           <label>Qualification Mapping Batch Code</label>
-                            <select class="form-control input-sm qMapCode" id="qMapCode" onchange="qMapCodeDetail(this)" required>
-                              <option value=""></option>
-                            </select>
-                         </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
              <div class="col-md-12">
-                <table id="yearList" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+                <table id="yearList" class="table table-striped table-hover table-bordered">
                     <thead>
                       <tr>
-                        <th class="header-th text-center">Year</th>
-                        <th class="header-th text-center">Edit</th>
+                        <th class="header-th">Year</th>
+                        <th class="header-th">Edit</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -152,10 +127,10 @@
 @include('bis.jslinks.js_datatables')
 <script type="text/javascript">
     $(document).ready( function(){
+      $('#rockets').hide();
        $('#ref_provider').DataTable();
        ref_provider();
-       $('#menu').addClass('active');
-       $('#farmers-reg').addClass('active');
+       
     });
 
     function ref_provider(){
@@ -200,7 +175,7 @@
             
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/retrieve/trackingYears/'+oData.person_id+'/'+oData.year+'" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>');
+                      $(nTd).html('<a href="/retrieve/trackingYears/'+oData.person_id+'/'+oData.year+'" class="btn btn-primary col-xs-5 btn-sm"><i class="fa fa-pencil"></i> Edit</a> <div class="col-xs-1"></div> <a class="btn btn-success btn-sm col-xs-5" href="">View</a>');
                   }
                 },
                

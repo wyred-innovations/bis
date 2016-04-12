@@ -13,7 +13,8 @@
 
 
 
-Route::get('/','MainloaderController@view');
+Route::get('/','MainloaderController@home');
+Route::get('/bis/farmers/home','MainloaderController@home');
 
 //farmer
 Route::get('/bis/farmers/list','FarmerController@getFarmers');
@@ -54,7 +55,9 @@ Route::get('/bis/getHouseStatus','AutoSuggestController@getHouseStatus');
 Route::get('/bis/farmers/reports','ReportController@getFarmersReports');
 Route::get('/test_pdf','ReportController@test_pdf');
 Route::post('/bis/bargraph-report','ReportController@bargraphGuiReport');
-
+Route::get('/reports/track-years','ReportController@trackYears');
+Route::post('/reports/track-years','ReportController@trackYears');
+Route::get('/reports/bargraph','ReportController@bargraph');
 
 
 

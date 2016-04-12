@@ -35,7 +35,7 @@
         font-size: 12px;
     }
     .header-th {
-        background: #E76229!important;
+        background: #22C2C4!important;
         color: #FFFFFF;
     }
     div.slider {
@@ -86,7 +86,6 @@
         </div>
 
       <form id="farmerForm" method="post">
-
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <input type="hidden" name="person_id" value="" />
         <div class="ibox-content">
@@ -217,17 +216,17 @@
              </div>
          </div>
 
-         <div class="col-md-12" style="margin-top:20px;">
+      <!--    <div class="col-md-12" style="margin-top:20px;">
         <h3>
         <span class="form-step"> <i class="fa fa-building" style="margin-top:3px;"></i> </span>
         House Status
         </h3> 
-        </div>
+        </div> -->
 
-         
+        <!--  
 
         <div class="col-md-12">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">House Status</th>
@@ -256,7 +255,7 @@
                 </tbody>
               </table>
              
-         </div>
+         </div> -->
 
 
         <div class="col-md-12">
@@ -286,10 +285,11 @@
   
 
   $(document).ready( function(){
+     $('#rockets').hide();
     // $('#income_expenses').DataTable();
      $("#start_crop").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
      $('#menu').addClass('active');
-     $('#farmers-reg').addClass('active');
+    
     });
 
 
@@ -307,7 +307,7 @@
 
         event.preventDefault();
         var EmergencyClass = $(".relatives").first().clone().insertAfter("div.relatives:last");
-      
+     
         counter();
     }
 

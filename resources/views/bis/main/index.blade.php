@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="skin-acf-io layout-top-nav" >
+<body class="top-navigation" >
     
 @include('bis.bodywrapper.body_wrapper')
 

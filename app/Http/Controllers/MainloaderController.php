@@ -33,4 +33,9 @@ class MainloaderController extends Controller
     	return view('bis.main.index');
     }
     
+
+    
+    public function home(){
+       return view('bis.farmers.home');
+    }
 }

@@ -1,4 +1,5 @@
  $(function() {
+
         $('.ladda').click(function(e){
           e.preventDefault();
 
@@ -12,6 +13,7 @@
 	      formValidate = $(form);
 
 		  formValidate.validate({
+
 		          ignoreTitle: true,
 		          debug:true
 		  });
@@ -19,7 +21,6 @@
 
           if(!formValidate.valid()){
 				fail('alert_message','Some input fields is highly required. Please write something to resume.');
-          		
           		var errorInput = $(formValidate).find("input.error")[0];
 
           	try{

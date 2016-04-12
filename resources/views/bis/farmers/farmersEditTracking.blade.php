@@ -32,7 +32,7 @@
         font-size: 12px;
     }
     .header-th {
-        background: #E76229!important;
+        background: #22C2C4!important;
         color: #FFFFFF;
     }
     div.slider {
@@ -149,7 +149,7 @@
         </div>
 
          <div class="col-md-12">
-            <table id="incomeTable" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+            <table id="incomeTable" class="table table-striped table-hover table-bordered" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Item</th>
@@ -226,7 +226,7 @@
         </div>
 
          <div class="col-md-12">
-            <table id="expenses-table" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+            <table id="expenses-table" class="table table-striped table-hover table-bordered" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Item</th>
@@ -296,7 +296,7 @@
             </h3> 
         </div>
         <div class="col-md-12 ">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover table-bordered dataTables-example" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Sources of Credits</th>
@@ -399,7 +399,7 @@
            </div>
 
           <div class="col-md-12">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover table-bordered dataTables-example" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Land Name <small>(By Crops Planted)</small></th>
@@ -520,7 +520,7 @@
          </div>
 
           <div class="col-md-12">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover table-bordered dataTables-example" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Mga Tanom ug kahayupan</th>
@@ -669,9 +669,9 @@
   
 
   $(document).ready( function(){
+    $('#rockets').hide();
      $("#start_crop").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-     $('#menu').addClass('active');
-     $('#farmers-reg').addClass('active');
+     
 
 
       $(".rangePicker").datepicker({

@@ -108,6 +108,6 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => ['sub_category' => "Sub Category"],
 
 ];

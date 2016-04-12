@@ -72,10 +72,10 @@
 
   
 </style>
+<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
 @stop
 
 @section('content')
-<form id="reportForm" >
 
 <div class="col-lg-12" style="margin-top:-30px;">
     <h2>Reports</h2>
@@ -106,12 +106,12 @@
                           </div>
                           <div id="collapseOne" class="panel-collapse collapse in">
                               <div class="panel-body">
-
+                              <form id="trackYears">
                                 <div class="col-md-12">
                                 <div class="col-md-4">
                                   <div class="form-group">
                                    <label>Select Option</label>
-                                    <select class="form-control input-sm" name="type" id="type">
+                                    <select class="form-control input-sm" name="type" id="type" required>
                                       <option></option>
                                       <option value="Farmers">Farmers</option>
                                       <option value="Organization">Organization</option>
@@ -121,9 +121,9 @@
                                   <div class="col-md-4" id="person" style="display: none">
                                   <div class="form-group">
                                    <label>Results</label>
-                                    <select class="form-control input-sm" name="person_id" id="person_id">
+                                    <select class="form-control input-sm" name="sub_category" id="sub_category" required>
                                       <option></option>
-                                      <option>All</option>
+                                      <option value="All">All</option>
                                       @foreach($person as $person)
                                       <option value="{{ $person->person_id }}">{{ $person->last_name }}, {{ $person->first_name }} {{ $person->middle_name }}</option>
                                       @endforeach
@@ -133,7 +133,7 @@
                                   <div class="col-md-4" id="organization" style="display: none">
                                   <div class="form-group">
                                    <label>Results</label>
-                                    <select class="form-control input-sm" name="organization_id" id="organization_id">
+                                    <select class="form-control input-sm" name="organization_id" id="organization_id" required>
                                       <option></option>
                                       <option>All</option>
                                     </select>      
@@ -143,34 +143,40 @@
                                     <div class="form-group" id="data_5">
                                       <label>Range select</label>
                                       <div class="input-daterange input-group" id="datepicker">
-                                          <input type="text" class="input-sm form-control rangePicker" name="start" >
+                                          <input type="text" class="input-sm form-control rangePicker" name="start" required>
                                           <span class="input-group-addon">to</span>
-                                          <input type="text" class="input-sm form-control rangePicker" name="end" >
+                                          <input type="text" class="input-sm form-control rangePicker" name="end" required>
                                       </div>
                                   </div>
-                                  </div>
-                                  
-                                  <div class="col-md-12">
+                                    </div>
 
                                     <div class="form-group">
-                                      <span class="pull-left"><button class="btn btn-primary ladda-report ladda-button" data-url="/bis/bargraph-report" id="ladda" data-size="s" data-style="expand-left"><span class="ladda-label" id="saveBtn">Generate Report</span></button> </span>
+                                   <label>Additional Filter</label>
+
+                                        <div class="i-checks"><label> <input type="checkbox" name="show_income" value="true"> <i></i> Show Income </label></div>
+                                        <div class="i-checks"><label> <input type="checkbox" name="show_expenses" value="true"> <i></i> Show Expenses </label></div>
+                          
                                     </div>
+                                    <div class="col-md-12">
+
+                                    <div class="form-group">
+                                      <span class="pull-left" onclick="openPrint()"><button class="btn btn-primary " ><span>Generate Report</span></button> </span>
+                                    </div>
+
+                                 <!--    <div class="form-group">
+                                      <span class="pull-left" onclick="generateBar()"><button class="btn btn-primary " ><span>Generate Bargraph</span></button> </span>
+                                    </div> -->
+
+
                                   </div>
-                                  </form>
+
+                                    </form>
+                             
+
+                                  
 
 
-                                  <div class="col-lg-12">
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-title">
-                                           
-                                        </div>
-                                        <div class="ibox-content" id="barchartContainer">
-                                                <div>
-                                                    <canvas id="barCharts" ></canvas>
-                                                </div> 
-                                        </div>
-                                    </div>
-                                </div>
+                                  
                                 </div>
 
                               </div>
@@ -315,11 +321,23 @@
 <script src ="/assets/js/custom/laddaReport.js" type="text/javascript"></script>
 <script src ="/assets/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="/assets/plugins/chartjs/Chart.min.js"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
 <script>
+
+
+  $(document).ready(function () {
+    $('#rockets').hide();
+          $('.i-checks').iCheck({
+              checkboxClass: 'icheckbox_square-green',
+              radioClass: 'iradio_square-green',
+          });
+      });
+       
+
+
   
 
   $(document).ready( function(){
-
      $('#menu').addClass('active');
      $('#reports').addClass('active');
 
@@ -332,7 +350,37 @@
 
 });
 
+  function openPrint(){
 
+      event.preventDefault();
+
+      var url = '/reports/track-years';
+      data = $("#trackYears").serialize();
+
+      validateInfo(url,data);
+
+      console.log(data);
+
+      var left = (screen.width/2)-(950/2);
+      var top = (screen.height/2)-(950/2);
+      window.open('/reports/track-years?'+data, '_blank', 'left='+left+',top='+top+',location=yes,height=500,width=750,scrollbars=yes,status=yes');
+  }
+
+  function generateBar(){
+
+      event.preventDefault();
+
+      var url = '/reports/bargraph?';
+      data = $("#trackYears").serialize();
+
+      validateInfo(url,data);
+
+      console.log(data);
+
+      var left = (screen.width/2)-(950/2);
+      var top = (screen.height/2)-(950/2);
+      window.open(url+data, '_blank', 'left='+left+',top='+top+',location=yes,height=500,width=750,scrollbars=yes,status=yes');
+  }
 
   $('#type').change(function(){
       
@@ -345,5 +393,35 @@
           }
   });
 
+
+  function validateInfo(url,data){
+
+        $.ajax( {
+
+          url: url,
+          type: 'POST',
+          data: data,
+          processData: false,
+          contentType: false,
+          success:function(data){
+           
+             
+                if(data[0] == true){
+
+
+                }else if(data[0] == false){
+
+                  fail('alert_message',data[1]);
+                  return false;
+
+                }
+
+            },
+              error: function (error) {
+              
+              }
+
+        });
+  }
   </script>
 @stop

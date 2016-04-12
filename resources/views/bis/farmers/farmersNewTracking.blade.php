@@ -32,7 +32,7 @@
         font-size: 12px;
     }
     .header-th {
-        background: #E76229!important;
+        background: #22C2C4!important;
         color: #FFFFFF;
     }
     div.slider {
@@ -148,7 +148,7 @@
         </div>
 
          <div class="col-md-12">
-            <table id="incomeTable" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+            <table id="incomeTable" class="table table-striped table-hover table-bordered" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Item</th>
@@ -158,7 +158,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                     <td><b>Kita (Income)</b></td>
+                     <td class="header-th" colspan="3"><b>Kita (Income)</b></td>
                    </tr>
 
                   @foreach($income as $keyVal)
@@ -197,7 +197,7 @@
                         </div>
                     </td>
                     <td class="text-center">
-                      <button class="btn btn-danger btn-sm" onclick="removeNewIncomeType(this)"><i class="fa fa-close"></i> Remove</button>
+                      <button class="btn btn-danger btn-block btn-sm" onclick="removeNewIncomeType(this)"><i class="fa fa-close"></i> Remove</button>
                     </td>
                   </tr>
 
@@ -225,7 +225,7 @@
         </div>
 
          <div class="col-md-12">
-            <table id="expenses-table" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
+            <table id="expenses-table" class="table table-striped table-hover table-bordered" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Item</th>
@@ -235,7 +235,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                     <td><b>Gasto (Expenses)</b></td>
+                     <td class="header-th" colspan="3"><b>Gasto (Expenses)</b></td>
                   </tr>
 
                     @foreach($expenses as $keyVal)
@@ -273,7 +273,7 @@
                         </div>
                     </td>
                       <td class="text-center">
-                      <button class="btn btn-danger btn-sm" onclick="removeExpenseType(this)"><i class="fa fa-close"></i> Remove</button>
+                      <button class="btn btn-danger btn-block btn-sm" onclick="removeExpenseType(this)"><i class="fa fa-close"></i> Remove</button>
                       </td>
                   </tr>
 
@@ -295,7 +295,7 @@
             </h3> 
         </div>
         <div class="col-md-12 ">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover table-bordered dataTables-example" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Sources of Credits</th>
@@ -395,7 +395,7 @@
            </div>
 
           <div class="col-md-12">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover table-bordered dataTables-example" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Land Name <small>(By Crops Planted)</small></th>
@@ -446,7 +446,7 @@
                         </div>
                     </td>
                      <td class="text-center">
-                      <button class="btn btn-danger btn-sm" onclick="removeLand(this)"><i class="fa fa-close"></i> Remove</button>
+                      <button class="btn btn-danger btn-block btn-sm" onclick="removeLand(this)"><i class="fa fa-close"></i> Remove</button>
                       </td>
                   </tr>
 
@@ -473,7 +473,7 @@
          </div>
 
           <div class="col-md-12">
-            <table id="" class="table table-striped table-hover dataTables-example" role="grid" aria-describedby="example2_info">
+            <table id="" class="table table-striped table-hover table-bordered dataTables-example" role="grid" aria-describedby="example2_info">
                 <thead class="header-th">
                   <tr>
                     <th class="header-th">Mga Tanom ug kahayupan</th>
@@ -529,7 +529,7 @@
                         </div>
                     </td>
                     <td class="text-center">
-                      <button class="btn btn-danger btn-sm" onclick="removeAgriType(this)"><i class="fa fa-close"></i> Remove</button>
+                      <button class="btn btn-danger btn-block btn-sm" onclick="removeAgriType(this)"><i class="fa fa-close"></i> Remove</button>
                       </td>
                   </tr>
 
@@ -573,9 +573,8 @@
   
 
   $(document).ready( function(){
+     $('#rockets').hide();
      $("#start_crop").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-     $('#menu').addClass('active');
-     $('#farmers-reg').addClass('active');
 
 
       $(".rangePicker").datepicker({
