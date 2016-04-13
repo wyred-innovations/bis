@@ -4,7 +4,7 @@
 
 @section('css_filtered')
 @include('bis.csslinks.css_crud')
-
+<!-- DEVELOPMENT -->
 <style>
     
     .slider{
