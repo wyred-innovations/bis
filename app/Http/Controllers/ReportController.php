@@ -75,12 +75,14 @@ class ReportController extends Controller
                 ->where('year','>=',Request::input('start'))
                 ->where('year','<=',Request::input('end'))
                 ->orderby('year','asc')
+                ->orderby('person_id','asc')
                 ->get();
 
             $expenses = db::table('tblviewreportexpenses')
                     ->where('year','>=',Request::input('start'))
                     ->where('year','<=',Request::input('end'))
                     ->orderby('year','asc')
+                    ->orderby('person_id','asc')
                     ->get();
         }else{
 
@@ -132,7 +134,7 @@ class ReportController extends Controller
 
         }
 
-
+        /*staged*/
         foreach($year as $yearValue){
 
             foreach($income as $dataValue){

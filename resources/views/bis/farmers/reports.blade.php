@@ -101,7 +101,7 @@
                       <div class="panel panel-info">
                           <div class="panel-heading">
                               <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Filter By Year</a>
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Report Maker</a>
                               </h5>
                           </div>
                           <div id="collapseOne" class="panel-collapse collapse in">
@@ -150,23 +150,30 @@
                                   </div>
                                     </div>
 
-                                    <div class="form-group">
-                                   <label>Additional Filter</label>
+                                    <div class="col-md-12">
+                                      <div class="col-md-4">
+                                          <label>Additional Filter</label>
 
-                                        <div class="i-checks"><label> <input type="checkbox" name="show_income" value="true"> <i></i> Show Income </label></div>
-                                        <div class="i-checks"><label> <input type="checkbox" name="show_expenses" value="true"> <i></i> Show Expenses </label></div>
-                          
+                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_income" value="true"> <i></i> Show Income </label></div>
+                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_expenses" value="true"> <i></i> Show Expenses </label></div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label>Additional Filter</label>
+                                        <div class="i-checks"><label> <input type="radio" value="option1" name="a"> <i></i> Normal Report</label></div>
+                                        <div class="i-checks"><label> <input type="radio" checked="" value="option2" name="a"> <i></i> Detailed Report </label></div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label>Additional Filter</label>
+                                        <div class="i-checks"><label> <input checked type="checkbox" name="show_income" value="true"> <i></i> Bar Graph </label></div>
+                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_expenses" value="true"> <i></i> Pie Graph </label></div>
+                                      </div>
                                     </div>
+
                                     <div class="col-md-12">
 
-                                    <div class="form-group">
-                                      <span class="pull-left" onclick="openPrint()"><button class="btn btn-primary " ><span>Generate Report</span></button> </span>
-                                    </div>
-
-                                 <!--    <div class="form-group">
-                                      <span class="pull-left" onclick="generateBar()"><button class="btn btn-primary " ><span>Generate Bargraph</span></button> </span>
-                                    </div> -->
-
+                                      <div class="form-group">
+                                        <span class="pull-right" onclick="openPrint()"><button class="btn btn-primary " ><span>Generate Report</span></button> </span>
+                                      </div>
 
                                   </div>
 
@@ -182,123 +189,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="panel panel-info">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Basic Listing </a>
-                              </h4>
-                          </div>
-                          <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                              <div class="col-md-12">
-                                 <div class="col-md-4">
-                                  <div class="form-group">
-                                   <label>Farmers</label>
-                                    <select class="form-control input-sm" name="gender" id="gender">
-                                      <option></option>
-                                      <option value="All">All</option>
-                                      
-                                    </select>      
-                                  </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                  <div class="form-group">
-                                   <label>Organization</label>
-                                    <select class="form-control input-sm" name="gender" id="gender">
-                                      <option></option>
-                                      <option>All</option>
-                                    </select>      
-                                  </div>
-                                  </div>
-                                   <div class="col-md-4">
-                                    <div class="form-group" id="data_2">
-                                        <label class="font-noraml">Select Year</label>
-                                        <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input type="text" class="form-control rangePicker" value="">
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-
-
-                        <div class="col-md-12">
-                              <div class="hr-line-dashed"></div>
-                          </div>
-
-                          <div class="col-md-12">
-                          <h3>
-                          <span class="form-step"> <i class="fa fa-money"  style="margin-top:3px;"></i> </span>
-                          Estimated Monthly Income
-                          </h3> 
-                          </div>
-
-                           <div class="col-md-12">
-                              <table id="incomeTable" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
-                                  <thead class="header-th">
-                                    <tr>
-                                      <th class="header-th">Item</th>
-                                      <th class="header-th text-center">Monthly Income</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                       <td colspan="2"><b>Kita (Income)</b></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-center">A</td>
-                                      <td class="text-center">B</td>
-                                    </tr>
-                              
-
-                                  </tbody>
-                                </table>
-                           </div>
-
-
-                               <div class="col-md-12">
-                              <div class="hr-line-dashed"></div>
-                          </div>
-
-                          <div class="col-md-12">
-                          <h3>
-                          <span class="form-step"> <i class="fa fa-money"  style="margin-top:3px;"></i> </span>
-                          Estimated Monthly Expenses
-                          </h3> 
-                          </div>
-
-                           <div class="col-md-12">
-                              <table id="incomeTable" class="table table-striped table-hover" role="grid" aria-describedby="example2_info">
-                                  <thead class="header-th">
-                                    <tr>
-                                      <th class="header-th">Item</th>
-                                      <th class="header-th text-center">Estimated Monthly Expenses</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                       <td colspan="2"><b>Gasto (Expenses)</b></td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-center">A</td>
-                                      <td class="text-center">B</td>
-                                    </tr>
-                              
-
-                                  </tbody>
-                                </table>
-                           </div>
-
-
-
-      
-
-
-                              
-
-                              </div>
-                          </div>
-                      </div>
+                      
                   </div>
               </div>
           </div>

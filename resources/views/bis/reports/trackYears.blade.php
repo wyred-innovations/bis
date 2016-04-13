@@ -22,7 +22,7 @@
 				<img src="http://{{$_SERVER['HTTP_HOST']}}/assets/img/logo.png" height="30px" width= "auto">
 			</div>
 			<div class="col-md-7">
-					<h4 class="t-center bold">SACRED HEART BUTUAN</h4>
+					<h3 class="t-center bold">SACRED HEART OF BUTUAN</h3>
 					<p class="t-center">J.C Aquino Ave. Butuan City</p>
 			</div>
 			
@@ -45,8 +45,8 @@
 		
 
 
-		<div class="col-md-12 text-center text-primary">
-			<h3>INCOME AND EXPENSES</h3>
+		<div class="col-md-12 text-center text-primary" style="margin-top: 70px">
+			<h4>INCOME AND EXPENSES</h4>
 			<label class="text-muted"><u><i>Year Range: <span >{{ $sorter["start"] }} - {{ $sorter["end"] }}</i></u></span></label>
 
 		</div>
@@ -62,7 +62,7 @@
 
 			@foreach($finalIncomeData as $key => $value)
 			<div class="form-control text-center " style="background-color:rgb(171, 233, 137)">
-				<label class=""><i>{{ $key }}</i></label>
+				<label style="color: white"><i>{{ $key }}</i></label>
 			</div>
 			<table class="table  table-condensed table-bordered ">
 					<thead>
@@ -110,15 +110,16 @@
 			<div class="text-danger">
 				<b><h4>LIST OF EXPENSES</h4></b>
 			</div>
+		
 
 			@foreach($finalExpensesData as $key => $valueExpense)
-			<div class="form-control text-center " style="background-color:rgb(171, 233, 137)">
-				<label class=""><i>{{ $key }}</i></label>
+			<div class="form-control text-center " style="background-color:#DA425A">
+				<label style="color: white"><i>{{ $key }}</i></label>
 			</div>
 			<table class="table  table-condensed table-bordered ">
 					<thead>
 						<tr>
-							<th class="text-center">Income Type</th>
+							<th class="text-center">Expenses Type</th>
 							<th class="text-center">Rates</th>
 							<th class="text-center">Ave. Value</th>
 						</tr>
@@ -298,7 +299,7 @@
 		        labels: years,
 		        datasets: [
 		            {
-		                label: "My First dataset",
+		                label: "Income",
 		                fillColor: "rgba(26,179,148,0.5)",
 		                strokeColor: "rgba(220,220,220,0.8)",
 		                highlightFill: "rgba(220,220,220,0.75)",
@@ -306,7 +307,7 @@
 		                data: incomeFinal
 		            },
 		            {
-		                label: "My Second dataset",
+		                label: "Expenses",
 		                fillColor: "#C90887",
 		                strokeColor: "rgba(26,179,148,0.8)",
 		                highlightFill: "rgba(26,179,148,0.75)",

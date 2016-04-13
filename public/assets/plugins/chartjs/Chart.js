@@ -99,7 +99,7 @@
 			showTooltips: true,
 
 			// Boolean - Determines whether to draw built-in tooltip or call custom tooltip function
-			customTooltips: false,
+			customTooltips: true,
 
 			// Array - Array of string names to attach tooltip events
 			tooltipEvents: ["mousemove", "touchstart", "touchmove", "mouseout"],
@@ -132,7 +132,7 @@
 			tooltipTitleFontColor: "#fff",
 
 			// Number - pixel width of padding around tooltip text
-			tooltipYPadding: 6,
+			tooltipYPadding: 36,
 
 			// Number - pixel width of padding around tooltip text
 			tooltipXPadding: 6,
@@ -2093,6 +2093,8 @@
 					this.showTooltip(activeBars);
 				});
 			}
+
+
 
 			//Declare the extension of the default point, to cater for the options passed in to the constructor
 			this.BarClass = Chart.Rectangle.extend({
