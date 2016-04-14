@@ -85,8 +85,8 @@
             <h5>Farmers <small class="m-l-sm">Records</small></h5>
             <div class="ibox-tools">
                <div class="pull-right">
-                 <a class="btn btn-danger" href="{{url('')}}" style="margin-top:-9px;color:#FFFFFF;"><i class="fa fa-print"></i> Print</a>
-                 <a class="btn btn-primary" href="{{url('bis/farmers/list')}}" style="margin-top:-9px;"><i class="fa fa-reply"></i> Back</a>
+<!--                  <a class="btn btn-danger" href="{{url('')}}" style="margin-top:-9px;color:#FFFFFF;"><i class="fa fa-print"></i> Print</a>
+ -->                 <a class="btn btn-primary" href="{{url('bis/farmers/list')}}" style="margin-top:-9px;"><i class="fa fa-reply"></i> Back</a>
                </div>
             </div>
         </div>
@@ -655,6 +655,8 @@
 
 
  </form>
+
+    
 <div class="col-md-1"></div>
 
 @stop

@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'degomaralphreigh@gmail.com', 'name' => 'SMI'],
+    'from' => ['address' => 'wyred.innovations@gmail.com', 'name' => 'BIS SOFTWARE'],
 
     /*
     |--------------------------------------------------------------------------

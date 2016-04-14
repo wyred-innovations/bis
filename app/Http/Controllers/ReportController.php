@@ -40,6 +40,13 @@ class ReportController extends Controller
     	$person = db::table('ref_person')
     		->get();
 
+        $person = db::table('ref_person')
+            ->get();
+
+        $person = db::table('ref_person')
+            ->get();
+            
+
         return view('bis.farmers.reports')
         		->with('person',$person);
     }
@@ -69,9 +76,16 @@ class ReportController extends Controller
 
         }
 
-        if(Request::input("sub_category") == "All"){
+        if(Request::input("report_type") == "All"){
 
             return $this->allFarmerReport();
+
+        }
+
+
+        if(Request::input("sub_category") == "percentage"){
+
+            return $this->percentageReport();
 
         }else{
 
@@ -134,27 +148,8 @@ class ReportController extends Controller
                 }
         }
 
+    
         
-        
-        
-        $year = "";
-        
-        foreach ($expenses as $key => $value) {
-            
-            if($tempYear == ""){
-                $tempYear =  $value->year;
-                $year[] = $value->year;
-            }
-
-            if($tempYear != $value->year){
-
-                $tempYear =  $value->year;
-                $year[] = $value->year;
-
-            }
-
-        }
-
 
         foreach($year as $yearValue){
 
@@ -185,6 +180,25 @@ class ReportController extends Controller
                     ->setOption('javascript-delay', 1000)
                     ->stream('reports.pdf');
 
+    }
+
+    public function percentageReport(){
+
+
+        $income = db::table('tblviewreportincome')
+                    ->where('person_id',Request::input('sub_category'))
+                    ->where('year','>=',Request::input('start'))
+                    ->where('year','<=',Request::input('end'))
+                    ->orderby('year','asc')
+                    ->get();
+
+            $expenses = db::table('tblviewreportexpenses')
+                    ->where('person_id',Request::input('sub_category'))
+                    ->where('year','>=',Request::input('start'))
+                    ->where('year','<=',Request::input('end'))
+                    ->orderby('year','asc')
+                    ->get();
+                    
     }
 
     public function allFarmerReport(){
@@ -238,35 +252,32 @@ class ReportController extends Controller
         
        
         $yearCount = 0;
+
         foreach ($income as $key => $value) {
             
-            if($tempYear == ""){
-                $tempYear =  $value->year;
-                $year[] = $value->year;
+            if($key == 0){
+                $year[] = $tempYear;
             }
 
-            if($tempYear != $value->year){
 
-                foreach ($year as $keyYear => $yearVal) {
+            foreach ($year as $keyYear => $yearVal) {
 
-                    if($yearVal == $value->year){
-                        $yearCount++;
-                    }
-
+                if($value->year == $yearVal){
+                    $yearCount++;
                 }
 
-                if($yearCount == 0 ){
-
-                        $tempYear =  $value->year;
-                        $year[] = $value->year;
-                }
+            }
+            if($yearCount == 0 ){
+                    $year[] = $value->year;
             }
 
+            $yearCount = 0;
+            
         }   
 
 
-        foreach($person as $personValue){
 
+        foreach($person as $personValue){
 
             foreach($income as $dataValue){
                 
@@ -285,36 +296,31 @@ class ReportController extends Controller
         }
 
 
-
-        /*EXPENSES LOOPING*/
         $year = [];
-
+        /*EXPENSES LOOPING*/
         $yearCount = 0;
+
         foreach ($expenses as $key => $value) {
             
-            if($tempYear == ""){
-                $tempYear =  $value->year;
-                $year[] = $value->year;
+            if($key == 0){
+                $year[] = $tempYear;
             }
 
-            if($tempYear != $value->year){
 
-                foreach ($year as $keyYear => $yearVal) {
+            foreach ($year as $keyYear => $yearVal) {
 
-                    if($yearVal == $value->year){
-                        $yearCount++;
-                    }
-
+                if($value->year == $yearVal){
+                    $yearCount++;
                 }
 
-                if($yearCount == 0 ){
-
-                        $tempYear =  $value->year;
-                        $year[] = $value->year;
-                }
+            }
+            if($yearCount == 0 ){
+                    $year[] = $value->year;
             }
 
-        }
+            $yearCount = 0;
+            
+        }   
 
 
         foreach($person as $personValue){
@@ -336,17 +342,12 @@ class ReportController extends Controller
         }
 
 
-
-
-
-
-
         $sorter = Request::all();
 
-        return view('bis.reports.trackYearsAllPeople')
+       /* return view('bis.reports.trackYearsAllPeople')
                 ->with('sorter', $sorter)
                 ->with('finalExpensesData', $finalExpensesData)
-                ->with('finalIncomeData', $finalIncomeData);
+                ->with('finalIncomeData', $finalIncomeData);*/
 
 
 
@@ -365,7 +366,7 @@ class ReportController extends Controller
     public function bargraph(){
 
 
-        $return = new rrdReturn();
+        $return = new rrdReturn();/**/
 
         $validator = Validator::make(
             [

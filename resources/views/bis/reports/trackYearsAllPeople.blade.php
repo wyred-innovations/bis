@@ -56,7 +56,6 @@
 				income = 0;
 			}
 
-		
 
 
 			console.log(incomeFinal);
@@ -86,6 +85,85 @@
 		        barValueSpacing: 62,
 		        barDatasetSpacing: 2,
 		        responsive: true,
+		    }
+
+
+		    var ctx = document.getElementById(div).getContext("2d");
+		    var myNewChart = new Chart(ctx).Bar(barData, barOptions);
+
+		}
+
+
+			function bargraph_exp(id,dataset){
+
+
+			var dataoBj =  dataset;
+			var div = id;
+
+			var years = [];
+
+			var expenses = 0;
+			var expensesFinal = [];
+
+			var expenses = 0;
+			var expensesFinal = [];
+
+
+			tempAverage = 0;
+			tempAverageExpenses = 0;
+			tempAverageExpenses = 0;
+
+			for(i in dataoBj){
+
+				years.push(i)
+
+				for(sub in dataoBj[i]){
+					var expenses_start = dataoBj[i][sub].expenses_start;
+					var expenses_end = dataoBj[i][sub].expenses_end;
+
+					if(expenses_start == "Above "){
+						expenses_start = 7000;
+					}
+
+					var tempAverage = (parseFloat(expenses_start)+parseFloat(expenses_end))/2;
+					expenses += tempAverage;
+				}	
+
+				expensesFinal.push(expenses);
+				expenses = 0;
+			}
+
+		
+
+
+			console.log(expensesFinal);
+
+            var barData = {
+		        labels: years,
+		        datasets: [
+		            {
+		                label: "Income",
+		                fillColor: "#F8005F",
+		                strokeColor: "rgba(220,220,220,0.8)",
+		                highlightFill: "rgba(220,220,220,0.75)",
+		                highlightStroke: "rgba(220,220,220,1)",
+		                data: expensesFinal
+		            }
+		           
+		        ]
+		    };
+
+		    var barOptions = {
+		        scaleBeginAtZero: true,
+		        scaleShowGridLines: true,
+		        scaleGridLineColor: "rgba(0,0,0,.05)",
+		        scaleGridLineWidth: 5,
+		        barShowStroke: false,
+		        barStrokeWidth: 2,
+		        barValueSpacing: 62,
+		        barDatasetSpacing: 2,
+		        responsive: true,
+
 		    }
 
 
@@ -188,8 +266,8 @@
 			@foreach($finalIncomeData as $yearData)
 				
 
-				<div class="text-primary">
-						<b><h5>{{incomeInfo($yearData)}}</h5></b>
+				<div class="text-primary" style="margin-top: 40px">
+						<b><h5>Farmer: <u>{{incomeInfo($yearData)}}</u></h5></b>
 				</div>
 
 				@foreach($yearData as $key => $value)
@@ -247,7 +325,7 @@
 		            </div>
 		            <div class="ibox-content">
 		                <div class="canvas-holder" style="width: 818px; height: 409px;">
-		                    <canvas id="barChart{{$key}}" width="1636" height="818" style="width: 818px; height: 409px;"></canvas>
+		                    <canvas id="barChart{{$key}}" width="1636" height="818" style="width: 500; height: 500;"></canvas>
 		                </div>
 		            </div>
 		        </div>
@@ -319,23 +397,33 @@
 						</div>
 					</div>
 					@endforeach
+
+
+					<div class="ibox float-e-margins">
+		            <div class="ibox-title">
+		                <h5>Barchart</h5>
+		                <div ibox-tools></div>
+		            </div>
+		            <div class="ibox-content">
+		                <div class="canvas-holder" style="width: 818px; height: 409px;">
+		                    <canvas id="barChart{{$person_id}}" width="1636" height="818" style="width: 818px; height: 409px;"></canvas>
+		                </div>
+		            </div>
+			        </div>
+
+			        <script type="text/javascript"> 
+			        		var id = "barChart{{$person_id}}";
+			        		var dataSet = <?php echo json_encode($yearExpensesData) ?>;
+			        		bargraph_exp(id,dataSet); 
+
+			        </script>
+
 				@endforeach
 			@endif
 		</div>
 
 
 
-	    <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Barchart</h5>
-                <div ibox-tools></div>
-            </div>
-            <div class="ibox-content">
-                <div class="canvas-holder" style="width: 818px; height: 409px;">
-                    <canvas id="barChart" width="1636" height="818" style="width: 818px; height: 409px;"></canvas>
-                </div>
-            </div>
-        </div>
 	<?php
 
 			$subtotal = 0;

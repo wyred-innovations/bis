@@ -72,13 +72,16 @@
 
 @section('content')
 <div class="col-lg-12" style="margin-top:-30px;">
-    <h2>Farmer's Income and Expenses</h2>
+    <h2><i class="fa fa-money"></i> Farmer's Income and Expenses</h2>
     <ol class="breadcrumb beacon" >
         <li>
             <a href="/">Home</a>
         </li>
+        <li>
+            <a href="{{url('bis/farmers/list')}}">Farmers List</a>
+        </li>
         <li class="active">
-            <a href="{{url('bis/farmers/list')}}"><strong>Income and Expenses</strong></a>
+            <a href="#"><strong>Income and Expenses</strong></a>
         </li>
     </ol>
 </div>
@@ -175,7 +178,7 @@
             
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/retrieve/trackingYears/'+oData.person_id+'/'+oData.year+'" class="btn btn-primary col-xs-5 btn-sm"><i class="fa fa-pencil"></i> Edit</a> <div class="col-xs-1"></div> <a class="btn btn-success btn-sm col-xs-5" href="">View</a>');
+                      $(nTd).html('<a href="/retrieve/trackingYears/'+oData.person_id+'/'+oData.year+'" class="btn btn-primary btn-block text-center col-xs-5 btn-sm"><i class="fa fa-pencil"></i> Edit</a> ');
                   }
                 },
                

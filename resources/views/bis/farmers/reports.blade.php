@@ -108,19 +108,10 @@
                               <div class="panel-body">
                               <form id="trackYears">
                                 <div class="col-md-12">
-                                <div class="col-md-4">
+                              
+                                  <div class="col-md-4" id="person" >
                                   <div class="form-group">
-                                   <label>Select Option</label>
-                                    <select class="form-control input-sm" name="type" id="type" required>
-                                      <option></option>
-                                      <option value="Farmers">Farmers</option>
-                                      <option value="Organization">Organization</option>
-                                    </select>      
-                                  </div>
-                                  </div>
-                                  <div class="col-md-4" id="person" style="display: none">
-                                  <div class="form-group">
-                                   <label>Results</label>
+                                   <label>Farmers</label>
                                     <select class="form-control input-sm" name="sub_category" id="sub_category" required>
                                       <option></option>
                                       <option value="All">All</option>
@@ -130,43 +121,61 @@
                                     </select>      
                                   </div>
                                   </div>
-                                  <div class="col-md-4" id="organization" style="display: none">
+                                  <div class="col-md-4" id="organization" >
                                   <div class="form-group">
-                                   <label>Results</label>
-                                    <select class="form-control input-sm" name="organization_id" id="organization_id" required>
+                                   <label>Organization</label>
+                                    <select class="form-control input-sm" name="organization" id="organization" required>
                                       <option></option>
                                       <option>All</option>
+                                      @foreach($organization as $org)
+                                      <option value="{{ $org->organization_id }}">{{ $org->organization_name }}</option>
+                                      @endforeach
                                     </select>      
                                   </div>
                                   </div>
-                                   <div class="col-md-4">
-                                    <div class="form-group" id="data_5">
-                                      <label>Range select</label>
-                                      <div class="input-daterange input-group" id="datepicker">
-                                          <input type="text" class="input-sm form-control rangePicker" name="start" required>
-                                          <span class="input-group-addon">to</span>
-                                          <input type="text" class="input-sm form-control rangePicker" name="end" required>
-                                      </div>
-                                  </div>
-                                    </div>
 
-                                    <div class="col-md-12">
+                                  <div class="col-md-4" id="organization" >
+                                  <div class="form-group">
+                                   <label>Tribes</label>
+                                    <select class="form-control input-sm" name="tribes" id="tribes" required>
+                                      <option></option>
+                                      <option>All</option>
+                                      @foreach($tribes as $trb)
+                                      <option value="{{ $trb->tribe_id }}">{{ $trb->tribe_name }}</option>
+                                      @endforeach
+                                    </select>      
+                                  </div>
+                                  </div>
+
+                                  </div>
+
+
+                                  <div class="col-md-12">
+                                    <div class="col-md-4">
+                                      <div class="form-group" id="data_5">
+                                        <label>Range select</label>
+                                        <div class="input-daterange input-group" id="datepicker">
+                                            <input type="text" class="input-sm form-control rangePicker" name="start" required>
+                                            <span class="input-group-addon">to</span>
+                                            <input type="text" class="input-sm form-control rangePicker" name="end" required>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  
                                       <div class="col-md-4">
                                           <label>Additional Filter</label>
 
-                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_income" value="true"> <i></i> Show Income </label></div>
-                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_expenses" value="true"> <i></i> Show Expenses </label></div>
+                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_income" > <i></i> Show Income </label></div>
+                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_expenses" > <i></i> Show Expenses </label></div>
                                       </div>
                                       <div class="col-md-4">
                                         <label>Additional Filter</label>
-                                        <div class="i-checks"><label> <input type="radio" value="option1" name="a"> <i></i> Normal Report</label></div>
-                                        <div class="i-checks"><label> <input type="radio" checked="" value="option2" name="a"> <i></i> Detailed Report </label></div>
+                                        <div class="i-checks"><label> <input type="radio" value="detailed" name="report_type"> <i></i> Detailed Report</label></div>
+                                        <div class="i-checks"><label> <input type="radio" checked="" value="summarized" name="report_type"> <i></i> Summarized Report </label></div>
                                       </div>
-                                      <div class="col-md-4">
-                                        <label>Additional Filter</label>
-                                        <div class="i-checks"><label> <input checked type="checkbox" name="show_income" value="true"> <i></i> Bar Graph </label></div>
-                                          <div class="i-checks"><label> <input checked type="checkbox" name="show_expenses" value="true"> <i></i> Pie Graph </label></div>
-                                      </div>
+
+                                     
+
                                     </div>
 
                                     <div class="col-md-12">

@@ -34,6 +34,11 @@ Route::get('/retrieve/trackingYears/{id}/{year}','FarmerController@editTrackingY
 Route::post('/bis/update-new-tracking','FarmerController@updateNewTracking');
 
 
+//S U P P O R T
+Route::get('/bis/support/how-to-add-new-farmer','MainloaderController@toAddFarmer');
+Route::get('/bis/support/how-to-add-new-track-records','MainloaderController@toAddTrackRecords');
+
+
 // wyred - update
 Route::post('/bis/expenses-item/update/expenses_item','FarmerController@expensesItemUpdate');
 Route::post('/bis/income-item/update/income_item','FarmerController@incomeItemUpdate');
@@ -58,6 +63,7 @@ Route::post('/bis/bargraph-report','ReportController@bargraphGuiReport');
 Route::get('/reports/track-years','ReportController@trackYears');
 Route::post('/reports/track-years','ReportController@trackYears');
 Route::get('/reports/bargraph','ReportController@bargraph');
+
 
 
 

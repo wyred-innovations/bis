@@ -8,7 +8,12 @@
 
     <title>BIS</title>
 
-    @include('bis.csslinks.css_links')
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    @include('bis.csslinks.css_crud')
 
 </head>
 
@@ -42,6 +47,7 @@
 
     @include('bis.jslinks.js_initial')
     @include('bis.jslinks.js_final')
+    @include('bis.jslinks.js_crud')
 
 
 </html>

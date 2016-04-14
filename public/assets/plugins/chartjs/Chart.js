@@ -2041,6 +2041,17 @@
 		//Number - Spacing between data sets within X values
 		barDatasetSpacing : 1,
 
+		calculateBarWidth : function(datasetCount){
+
+                    if(options.isFixedWidth){
+                        return options.barWidth;
+                    }else{
+                        //The padding between datasets is to the right of each bar, providing that there are more than 1 dataset
+                        var baseWidth = this.calculateBaseWidth() - ((datasetCount - 1) * options.barDatasetSpacing);
+                            return (baseWidth / datasetCount);
+                    }
+		    	},
+
 		//String - A legend template
 		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 

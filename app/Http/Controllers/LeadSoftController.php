@@ -51,7 +51,7 @@ class LeadSoftController extends Controller
 	                      ->show();
 		}
 
-		$person              = new LeadSoftModel('ref_person','person_id'); 
+		$person              = new LeadSoftModel('admin_people','admin_id'); 
 		$person->first_name  = Request::input('fname');
 		$person->middle_name = Request::input('mname');
 		$person->last_name   = Request::input('lname');
@@ -63,7 +63,7 @@ class LeadSoftController extends Controller
 		$users            = new LeadSoftModel('tbl_users'); 
 		$users->username  = Request::input('email');
 		$users->password  = Hash::make(Request::input('password'));
-		$users->person_id = $personPrev;
+		$users->admin_id = $personPrev;
 		$users->save();
 
 

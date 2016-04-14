@@ -1,7 +1,7 @@
 <style>
 
-.text-red {
-    color: red;
+.text-blue {
+    color: #23C6C8;
 }
 
 </style>
@@ -18,11 +18,18 @@
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a aria-expanded="false" role="button" href="{{url('/bis/farmers/list')}}" style="color:#000000;"><i class="fa fa-th-large text-red"></i> Profile/Registration/Tracking </a>
+                        <a href="{{url('/bis/farmers/list')}}" style="color:#000000;"><i class="fa fa-th-large text-blue"></i> Profile/Registration/Tracking </a>
                       
                     </li>
                     <li>
-                        <a aria-expanded="false" role="button" href="{{url('/bis/farmers/reports')}}" style="color:#000000;"><i class="fa fa-list text-red"></i> Reports </a>                    
+                        <a href="{{url('/bis/farmers/reports')}}" style="color:#000000;"><i class="fa fa-list text-blue"></i> Reports </a>                    
+                    </li>
+                     <li class="dropdown">
+                        <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000;"><i class="fa fa-support text-blue"></i> Support <span class="caret" style="color:#000000;"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="{{url('/bis/support/how-to-add-new-farmer')}}">HOW TO ADD NEW FARMER</a></li>
+                            <li><a href="{{url('/bis/support/how-to-add-new-track-records')}}">HOW TO ADD NEW TRACK RECORDS</a></li>
+                        </ul>
                     </li>
                    
 
@@ -38,7 +45,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href=""><i class="fa fa-user"></i> User Settings</a>
+                            <a href="/admin/security/create-account"><i class="fa fa-user"></i> User Settings</a>
                         </li>
                     </ul>
                 </li>
@@ -51,7 +58,7 @@
             </div>
         </nav>
         </div>
-        <div class="wrapper wrapper-content">
+        <div class="wrapper wrapper-content animated fadeInRight">
             <div class="container">
 
        

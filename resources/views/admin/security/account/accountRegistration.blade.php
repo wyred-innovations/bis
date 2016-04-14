@@ -1,5 +1,12 @@
 @extends('bis.main.index')
 
+
+@section('css_filtered')
+@include('bis.csslinks.css_crud')
+
+@stop
+
+
 @section('content')
 
 
@@ -44,6 +51,9 @@
 	</div>             
 </div>
 
+@stop
 
+@section('js_filtered')
+@include('bis.jslinks.js_crud')
 
 @stop

@@ -39,6 +39,11 @@ class FarmerController extends Controller
 
     		$tribeData = TribeModel::where('tribe_name', '=', Request::input('tribe_name'))->first();
 
+        $designation               = DesignationModel::firstOrNew(['des_name' => Request::input('designation')]);     
+        $designation->des_name = Request::input('designation');
+        $designation->save();
+        $designationData = DesignationModel::where('des_name', '=', Request::input('designation'))->first();
+
 
     		$civilStatus               = CivilStatusModel::firstOrNew(['civil_status' => Request::input('civil_status')]);     
     		$civilStatus->civil_status = Request::input('civil_status');
@@ -77,9 +82,10 @@ class FarmerController extends Controller
         $farmer->religion_id     = $religionData->religion_id;
         $farmer->tribe_id        = $tribeData->tribe_id;
         $farmer->civil_id        = $civilData->civil_id;
+        $farmer->des_id          = $designationData->des_id;
         $farmer->start_of_crop   = Request::input('start_crop');
         $farmer->address         = $SchoolData->sch_id;
-        $farmer->sch_id          = Request::input('sch_attainment');
+        $farmer->sch_id          = $School->sch_id;
         $farmer->save();
 
     		$personData = DB::table('ref_person')->max('person_id');

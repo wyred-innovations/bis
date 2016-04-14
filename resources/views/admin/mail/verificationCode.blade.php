@@ -164,7 +164,7 @@ ol li {
         <tr>
           <td>
             <h2 style="text-align: center">Verification Code</h2>
-            <p style="text-align: center">This email comes from a software you are using in SMI.</p>
+            <p style="text-align: center">This email comes from a software you are using in BIS.</p>
             <p style="text-align: center">If you know nothing about this please ignore this message.</p>
             <p style="text-align: center">Your requested Verification code is down below.</p>
             <!-- button -->

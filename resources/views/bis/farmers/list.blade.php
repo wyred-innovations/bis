@@ -72,13 +72,13 @@
 
 @section('content')
 <div class="col-lg-12" style="margin-top:-30px;">
-    <h2>Farmers List Profile</h2>
+    <h2><i class="fa fa-user"></i>  Farmers List Profile</h2>
     <ol class="breadcrumb beacon" >
         <li>
             <a href="/">Home</a>
         </li>
         <li class="active">
-            <a href="{{url('admin/farmers/list')}}"><strong>Farmers List</strong></a>
+            <a href="{{url('bis/farmers/list')}}"><strong>Farmers List</strong></a>
         </li>
     </ol>
 </div>

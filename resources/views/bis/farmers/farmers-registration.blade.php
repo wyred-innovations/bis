@@ -71,15 +71,29 @@
 @stop
 
 @section('content')
+<div class="col-lg-12" style="margin-top:-30px;">
+    <h2>Farmers List Profile</h2>
+    <ol class="breadcrumb beacon" >
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="{{url('bis/farmers/list')}}">Farmers List</a>
+        </li>
+         <li class="active">
+            <a href="{{url('bis/farmers/farmers-registration')}}"><strong>Farmers Registration</strong></a>
+        </li>
+    </ol>
+</div>
 <div class="col-md-1"></div>
-<div class="col-lg-10">
+<div class="col-lg-10 pull-bottom">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>Farmers <small class="m-l-sm">Registration</small></h5>
             <div class="ibox-tools">
                <div class="pull-right">
-                <a class="btn btn-danger" href="{{url('')}}" style="margin-top:-9px;color:#FFFFFF;"><i class="fa fa-print"></i> Print</a>
-                 <a class="btn btn-primary" href="{{url('bis/farmers/list')}}" style="margin-top:-9px;"><i class="fa fa-reply"></i> Back</a>
+<!--                 <a class="btn btn-danger" href="{{url('')}}" style="margin-top:-9px;color:#FFFFFF;"><i class="fa fa-print"></i> Print</a>
+ -->                 <a class="btn btn-primary" href="{{url('bis/farmers/list')}}" style="margin-top:-9px;"><i class="fa fa-reply"></i> Back</a>
                </div>
             </div>
         </div>
@@ -126,29 +140,34 @@
             </div>
             <div class="form-group">
              <label>Religion</label>
-              <input class="form-control input-sm" type="text" id="religion_name" name="religion_name" required>        
+              <input class="form-control input-sm autoSuggest" data-url="/bis/getreligion" data-display="religion_name" type="text" id="religion_name" name="religion_name" required>        
             </div>
             <div class="form-group">
              <label>Tribe</label>
-              <input class="form-control input-sm" type="text" id="tribe_name" name="tribe_name" >        
+              <input class="form-control input-sm autoSuggest" data-url="/bis/getTribe" data-display="tribe_name" type="text" id="tribe_name" name="tribe_name" >        
             </div>
             <div class="form-group">
              <label>Organization</label>
-              <input class="form-control input-sm" type="text" id="organization" name="organization" >        
+             <label class="pull-right"><input type="checkbox" id="org" value="NA" style="margin-top:-10px;padding-right:10px;"> None</label>
+              <input class="form-control input-sm autoSuggest" data-url="/bis/getOrganization" data-display="organization_name" type="text" id="organization" name="organization" required>        
             </div>
            </div>
            <div class="col-md-6">
             <div class="form-group">
              <label>Civil Status</label>
-              <input class="form-control input-sm" type="text" id="civil_status" name="civil_status"  data-display="Civil Status" required>               
+              <select class="form-control input-sm" name="civil_status" id="civil_status">
+                <option></option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+              </select>      
             </div>
             <div class="form-group">
              <label>School Attaintment</label>
-                <input class="form-control input-sm" type="text" id="sch_attainment" name="sch_attainment"  data-display="School Attainment" required>               
+                <input class="form-control input-sm autoSuggest"  data-url="/bis/getSchoolAttainment" data-display="attainment" type="text" id="sch_attainment" name="sch_attainment"  data-display="School Attainment" required>               
             </div>
             <div class="form-group">
              <label>Designation</label>
-              <input class="form-control input-sm" type="text" id="designation" name="designation" >        
+              <input class="form-control input-sm autoSuggest" data-url="/bis/getDesignation" data-display="des_name" type="text" id="designation" name="designation" >        
             </div>
             <div class="form-group">
              <label>Other Income</label>
@@ -165,11 +184,11 @@
             </div>
             <div class="form-group">
              <label>Name of Spouse</label>
-             <input class="form-control input-sm" type="text" id="spouse_name" name="spouse_name" >        
+             <input class="form-control input-sm" type="text" id="spouse_name" name="spouse_name" readonly>        
             </div>
             <div class="form-group">
              <label>Total Numbers of HH Members</label>
-               <h5 class="pull-left form-control" id="numberRelatives"><span>1</span></h5>      
+               <h5 class="pull-left form-control" id="numberRelatives"><span></span></h5>      
             </div>
             <div class="form-group">
              <label>Home Address</label>
@@ -286,9 +305,25 @@
   $(document).ready( function(){
      $('#rockets').hide();
     // $('#income_expenses').DataTable();
-     $("#start_crop").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+     $("#start_crop").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
      $('#menu').addClass('active');
-    
+
+     $("#civil_status").on('change', function() {
+        if($(this).val() == 'Married'){
+            $('#spouse_name').attr('readonly', false);
+        } else {
+           $('#spouse_name').attr('readonly', true);
+        }
+    });
+
+    $('#org').click(function(){
+    if (this.checked) { 
+      $('#organization').text('None');
+    }else {
+      $('#organization').text('');
+    }
+    }); 
+
     });
 
 

@@ -43,7 +43,7 @@
                 <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
             --> </form>
 <!--                 <a href="/auth/facebook"  class="btn btn-success btn-facebook block full-width m-b" > <i class="fa fa-facebook"> </i> Sign in with Facebook</a>
- -->                <!-- <a href="/forgot-password"><small>Forgot password?</small></a> -->
+ -->                <a href="/forgot-password"><small>Forgot password?</small></a>
         </div>
     </div>
 
