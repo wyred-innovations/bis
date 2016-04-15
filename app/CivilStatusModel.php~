@@ -10,5 +10,3 @@ class CivilStatusModel extends Model
     protected $primaryKey = 'civil_id';
     protected $fillable = array('civil_id', 'civil_status');
 }
-
-//sdsdsdsdsd
