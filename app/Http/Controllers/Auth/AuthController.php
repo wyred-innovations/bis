@@ -7,7 +7,7 @@ use LeadAuth;
 class AuthController extends Controller {
 
     /**
-     * Handle an authentication attempt.
+     * Handldde an authentication attempt.
      *
      * @return Response
      */
