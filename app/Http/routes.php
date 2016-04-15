@@ -64,6 +64,7 @@ Route::get('/reports/track-years','ReportController@trackYears');
 Route::post('/reports/track-years','ReportController@trackYears');
 Route::get('/reports/bargraph','ReportController@bargraph');
 
+Route::get('/bis/farmers/summarizedReport','ReportController@summarizedReport');
 
 
 

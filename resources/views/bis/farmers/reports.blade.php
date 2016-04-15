@@ -150,8 +150,9 @@
                                   </div>
 
 
-                                  <div class="col-md-12">
-                                    <div class="col-md-4">
+                                  <div class="col-md-12" style="margin-top: 20px">
+
+                                    <div class="col-md-3">
                                       <div class="form-group" id="data_5">
                                         <label>Range select</label>
                                         <div class="input-daterange input-group" id="datepicker">
@@ -162,23 +163,29 @@
                                       </div>
                                     </div>
                                   
-                                      <div class="col-md-4">
+                                      <div class="col-md-3">
                                           <label>Additional Filter</label>
 
                                           <div class="i-checks"><label> <input checked type="checkbox" name="show_income" > <i></i> Show Income </label></div>
                                           <div class="i-checks"><label> <input checked type="checkbox" name="show_expenses" > <i></i> Show Expenses </label></div>
                                       </div>
-                                      <div class="col-md-4">
+                                      <div class="col-md-3">
                                         <label>Additional Filter</label>
                                         <div class="i-checks"><label> <input type="radio" value="detailed" name="report_type"> <i></i> Detailed Report</label></div>
                                         <div class="i-checks"><label> <input type="radio" checked="" value="summarized" name="report_type"> <i></i> Summarized Report </label></div>
+                                      </div>
+
+                                      <div class="col-md-3">
+                                          <label>Sort By</label>
+                                          <div class="i-checks"><label> <input type="radio" checked="" value="organization_id" name="sort_by"> <i></i> Organization</label></div>
+                                          <div class="i-checks"><label> <input type="radio"  value="tribe_id" name="sort_by"> <i></i> Tribes </label></div>
                                       </div>
 
                                      
 
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="margin-top: 30px">
 
                                       <div class="form-group">
                                         <span class="pull-right" onclick="openPrint()"><button class="btn btn-primary " ><span>Generate Report</span></button> </span>
@@ -254,7 +261,7 @@
 
       event.preventDefault();
 
-      var url = '/reports/track-years';
+      var url = '/bis/farmers/summarizedReport';
       data = $("#trackYears").serialize();
 
       validateInfo(url,data);
@@ -263,7 +270,7 @@
 
       var left = (screen.width/2)-(950/2);
       var top = (screen.height/2)-(950/2);
-      window.open('/reports/track-years?'+data, '_blank', 'left='+left+',top='+top+',location=yes,height=500,width=750,scrollbars=yes,status=yes');
+      window.open(url+'?'+data, '_blank', 'left='+left+',top='+top+',location=yes,height=500,width=750,scrollbars=yes,status=yes');
   }
 
   function generateBar(){

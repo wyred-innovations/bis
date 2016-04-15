@@ -40,15 +40,19 @@ class ReportController extends Controller
     	$person = db::table('ref_person')
     		->get();
 
-        $person = db::table('ref_person')
+        $organization = db::table('ref_organization')
+            ->where('organization_name','<>',"")
             ->get();
 
-        $person = db::table('ref_person')
+        $tribes = db::table('ref_tribe')
+            ->where('tribe_name','<>',"")
             ->get();
-            
+
 
         return view('bis.farmers.reports')
-        		->with('person',$person);
+        		->with('person',$person)
+                ->with('organization',$organization)
+                ->with('tribes',$tribes);
     }
 
     public function trackYears(){
@@ -76,12 +80,7 @@ class ReportController extends Controller
 
         }
 
-        if(Request::input("report_type") == "All"){
-
-            return $this->allFarmerReport();
-
-        }
-
+   
 
         if(Request::input("sub_category") == "percentage"){
 
@@ -182,22 +181,157 @@ class ReportController extends Controller
 
     }
 
-    public function percentageReport(){
+    public function summarizedReport(){
 
+        $return = new rrdReturn();
+
+        $validator = Validator::make(
+            [
+                'sub_category'     => Request::input('sub_category'),
+                'start'     => Request::input('start'),
+                'end'     => Request::input('end')
+
+            ],
+            [
+                'sub_category'        => 'required',
+                'start'        => 'required',
+                'end'        => 'required'
+               
+            ]
+        );
+
+        if ($validator->fails())
+        {
+            return "<label>".$validator->errors()->first()."</label>";
+
+        }
 
         $income = db::table('tblviewreportincome')
-                    ->where('person_id',Request::input('sub_category'))
                     ->where('year','>=',Request::input('start'))
                     ->where('year','<=',Request::input('end'))
                     ->orderby('year','asc')
                     ->get();
 
-            $expenses = db::table('tblviewreportexpenses')
-                    ->where('person_id',Request::input('sub_category'))
-                    ->where('year','>=',Request::input('start'))
-                    ->where('year','<=',Request::input('end'))
-                    ->orderby('year','asc')
-                    ->get();
+
+        $expenses = db::table('tblviewreportexpenses')
+                ->where('year','>=',Request::input('start'))
+                ->where('year','<=',Request::input('end'))
+                ->orderby('year','asc')
+                ->get();
+
+
+        /*ORGANIZATION LOOPING*/
+        $orgHolder = "";
+        $organizationData = [];
+        $finalIncomeData= [];
+        $finalExpensesData= [];
+
+        $incomeFiltred = [];
+        $personHolder = "";
+        $person = [];
+
+        foreach($income as $incomeValue){
+
+            $finalIncomeData[$incomeValue->organization_name][$incomeValue->person_id][$incomeValue->year][] = $incomeValue;
+        }
+
+        foreach($finalIncomeData as $finalIncomeFilt){
+
+            foreach($finalIncomeData as $finalIncomeFilt){
+
+                foreach($finalIncomeFilt as $personLevel){
+
+                    foreach($personLevel as $yearLevel){
+
+                        foreach($yearLevel as $key_year => $dataLevel){
+
+
+                            if(!isset($totalAverage)){
+                                $totalAverage = 0;
+                            }
+
+                            if($dataLevel->income_start == "Above "){
+                                $dataLevel->income_start = 7000;
+                            }
+
+                            $average = ($dataLevel->income_start + $dataLevel->income_end) /2;
+                            $dataLevel->averageValue = $average;
+
+                            $totalAverage += $dataLevel->averageValue; 
+                           
+                        }
+
+                        foreach($yearLevel as $key_year => $dataLevel){
+
+                            $dataLevel->totalValue = $totalAverage;
+ 
+                        }
+
+                        $average = 0;
+                        $totalAverage = 0;
+
+                        
+                    }
+                }
+            }
+        }
+
+        
+
+        foreach($finalIncomeData as $finalIncomeFilt){
+
+            foreach($finalIncomeData as $key => $finalIncomeFilt){
+
+                foreach($finalIncomeData as $key => $finalIncomeFilt){
+                    $i = 0; 
+
+                    dd($finalIncomeFilt);
+
+                    $filtered = new \stdClass();
+                    $filtered->total = $secondShift->totalValue;
+                    $filtered->first_name = $secondShift->first_name;
+                    $filtered->middle_name = $secondShift->middle_name;
+                    $filtered->last_name = $secondShift->last_name;
+                    $filtered->person_id = $secondShift->person_id;
+                    $filtered->year = $secondShift->year;
+                    
+                    
+
+
+                    $i = 0;
+
+                    $incomeFiltred[$person_key][] = $filtered;
+                }
+
+            }
+
+        }
+
+        dd($incomeFiltred);
+
+        foreach($expenses as $expensesValue){
+            $finalExpensesData[$expensesValue->organization_name][$expensesValue->person_id][] = $expensesValue;
+        
+        }
+
+
+       
+
+        $sorter = Request::all();
+
+        $pdf = Pdf::loadView('bis.reports.summarized',['sorter'=> $sorter,'finalExpensesData' => $finalExpensesData,'finalIncomeData' => $incomeFiltred]);
+        
+     
+        return $pdf->setPaper('letter')->setOrientation('portrait')
+                    ->setOption('margin-bottom', 10)
+                    ->setOption('margin-left', 10)
+                    ->setOption('margin-top', 10)
+                    ->setOption('enable-javascript', true)
+                    ->setOption('javascript-delay', 1000)
+                    ->stream('reports.pdf');
+
+     
+
                     
     }
 
